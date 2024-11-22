@@ -20,13 +20,12 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
-        if [ -f /usr/local/bin/chromedriver ]; then sudo rm /usr/local/bin/chromedriver; fi
         wget -q https://chromedriver.storage.googleapis.com/131.0.5563.19/chromedriver_linux64.zip
         unzip chromedriver_linux64.zip
         sudo mv chromedriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
-        export CHROME_BIN=$(which google-chrome)
-        export CHROME_DRIVER=$(which chromedriver)
+        export CHROME_BIN=/usr/bin/google-chrome
+        export CHROME_DRIVER=/usr/local/bin/chromedriver
 
     - name: Verify Chrome installation
       run: |
