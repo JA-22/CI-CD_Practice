@@ -11,7 +11,7 @@ public class Base {
         if (driver == null) {
             ChromeOptions options = new ChromeOptions();
             options.setBinary("/usr/bin/google-chrome");
-            options.addArguments("--headless"); // Opcional, ejecuta Chrome en modo headless
+            options.addArguments("--headless"); // Ejecuta Chrome en modo headless
             options.addArguments("--no-sandbox"); // Necesario para entornos de CI/CD como GitHub Actions
             options.addArguments("--disable-dev-shm-usage"); // Necesario para entornos de CI/CD como GitHub Actions
 
