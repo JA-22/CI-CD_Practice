@@ -20,31 +20,20 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
-        wget -q https://chromedriver.storage.googleapis.com/131.0.5563.19/chromedriver_linux64.zip
+        CHROME_VERSION=$(google-chrome --version | grep -oP '[0-9]+(?=\.)')
+        CHROMEDRIVER_VERSION=$(wget -qO- "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+        wget -q "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
         unzip chromedriver_linux64.zip
         sudo mv chromedriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
-        export CHROME_BIN=/usr/bin/google-chrome
-        export CHROME_DRIVER=/usr/local/bin/chromedriver
 
     - name: Verify Chrome installation
       run: |
-        echo "Google Chrome binary location: $CHROME_BIN"
-        echo "Google Chrome version: $($CHROME_BIN --version)"
-        echo "ChromeDriver binary location: $CHROME_DRIVER"
-        echo "ChromeDriver version: $($CHROME_DRIVER --version)"
+        google-chrome --version
+        chromedriver --version
 
     - name: Build with Maven
       run: mvn clean install
 
     - name: Run tests
-      run: mvn test
-
-    - name: Generate Allure report
-      run: mvn allure:report
-
-    - name: Publish Allure report
-      uses: actions/upload-artifact@v3
-      with:
-        name: allure-report
-        path: target/site/allure-maven/index.html
+      run:
