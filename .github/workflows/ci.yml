@@ -4,23 +4,24 @@ on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
     - name: Set up JDK 21
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v2
       with:
         distribution: 'zulu'
-        java-version: '21' 
+        java-version: '21'
 
-    - name: Install Chrome
+    - name: Install Chrome and ChromeDriver
       run: |
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
+        sudo apt-get install -y chromium-chromedriver
+        sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver
 
     - name: Build with Maven
       run: mvn clean install
@@ -32,7 +33,7 @@ jobs:
       run: mvn allure:report
 
     - name: Publish Allure report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: allure-report
         path: target/site/allure-maven/index.html
