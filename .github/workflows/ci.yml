@@ -21,15 +21,15 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
         sudo apt-get install -y chromium-chromedriver
-        export CHROME_BIN=/usr/bin/google-chrome
-        export DISPLAY=:99.0
+        export CHROME_BIN=$(which google-chrome)
+        export CHROME_DRIVER=$(which chromedriver)
 
     - name: Verify Chrome installation
       run: |
-        which google-chrome
-        google-chrome --version
-        which chromedriver
-        chromedriver --version
+        echo "Google Chrome binary location: $CHROME_BIN"
+        echo "Google Chrome version: $($CHROME_BIN --version)"
+        echo "ChromeDriver binary location: $CHROME_DRIVER"
+        echo "ChromeDriver version: $($CHROME_DRIVER --version)"
 
     - name: Build with Maven
       run: mvn clean install

@@ -10,11 +10,12 @@ public class Base {
     public static void initializeDriver() {
         if (driver == null) {
             ChromeOptions options = new ChromeOptions();
-            options.setBinary("/usr/bin/google-chrome"); // Especifica la ruta del binario de Chrome
+            options.setBinary(System.getenv("CHROME_BIN")); // Usar la ruta del binario de Chrome
             options.addArguments("--headless"); // Ejecuta Chrome en modo headless (sin interfaz gráfica)
             options.addArguments("--no-sandbox"); // Necesario para entornos de CI/CD como GitHub Actions
             options.addArguments("--disable-dev-shm-usage"); // Necesario para entornos de CI/CD como GitHub Actions
 
+            System.setProperty("webdriver.chrome.driver", System.getenv("CHROME_DRIVER")); // Usar la ruta del binario de ChromeDriver
             driver = new ChromeDriver(options); // Crea el `ChromeDriver` con las opciones especificadas
         }
     }
