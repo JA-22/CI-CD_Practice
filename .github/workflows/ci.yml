@@ -23,12 +23,13 @@ jobs:
         sudo apt-get install -y chromium-chromedriver
         export CHROME_BIN=/usr/bin/google-chrome
         export DISPLAY=:99.0
-        sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver || true
 
     - name: Verify Chrome installation
       run: |
         which google-chrome
         google-chrome --version
+        which chromedriver
+        chromedriver --version
 
     - name: Build with Maven
       run: mvn clean install
