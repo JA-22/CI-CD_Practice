@@ -31,7 +31,7 @@ jobs:
       run: |
         CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d '.' -f 1)  # Extrae la versión principal
         echo "Detected Chrome version: $CHROME_VERSION"
-        CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION || echo "LATEST_RELEASE")
+        CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
         echo "Detected ChromeDriver version: $CHROMEDRIVER_VERSION"
         wget -q "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
         unzip chromedriver_linux64.zip
@@ -59,7 +59,7 @@ jobs:
       run: mvn allure:report
 
     - name: Publish Allure report
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: allure-report
         path: target/site/allure-maven/index.html
