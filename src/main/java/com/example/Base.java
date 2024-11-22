@@ -8,7 +8,7 @@ public class Base {
 
     public static void initializeDriver() {
         if (driver == null) {
-            System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+            //System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
             driver = new ChromeDriver();
         }
     }
