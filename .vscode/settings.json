@@ -1,0 +1,18 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "cucumberautocomplete.steps": [
+      "C:/JavaProyects/maven-java-project/src/test/java/com/example/*.java"
+    ],
+    "cucumberautocomplete.syncfeatures": "C:/JavaProyects/maven-java-project/src/test/resources/features/*.feature",
+    "cucumberautocomplete.strictGherkinCompletion": true,
+    "cucumberautocomplete.smartSnippets": true,
+    "cucumberautocomplete.stepsInvariants": true,
+    "cucumberautocomplete.skipDocStringsFormat": true,
+    "cucumberautocomplete.formatConfOverride": {
+      "step": "regex",
+      "scenario": "regex",
+      "feature": "regex"
+    },
+  
+  }
