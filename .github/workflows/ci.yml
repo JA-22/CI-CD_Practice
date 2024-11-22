@@ -36,4 +36,13 @@ jobs:
       run: mvn clean install
 
     - name: Run tests
-      run:
+      run: mvn test
+
+    - name: Generate Allure report
+      run: mvn allure:report
+
+    - name: Publish Allure report
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report
+        path: target/site/allure-maven/index.html
