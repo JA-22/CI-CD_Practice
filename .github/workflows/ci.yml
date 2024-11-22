@@ -26,11 +26,15 @@ jobs:
         unzip chromedriver_linux64.zip
         sudo mv chromedriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
+        echo "CHROME_BIN=/usr/bin/google-chrome" >> $GITHUB_ENV
+        echo "CHROME_DRIVER=/usr/local/bin/chromedriver" >> $GITHUB_ENV
 
-    - name: Verify Chrome installation
+    - name: Verify Chrome and ChromeDriver
       run: |
-        google-chrome --version
-        chromedriver --version
+        echo "Google Chrome binary location: $CHROME_BIN"
+        echo "Google Chrome version: $($CHROME_BIN --version)"
+        echo "ChromeDriver binary location: $CHROME_DRIVER"
+        echo "ChromeDriver version: $($CHROME_DRIVER --version)"
 
     - name: Build with Maven
       run: mvn clean install
