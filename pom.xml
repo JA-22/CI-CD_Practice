@@ -9,33 +9,37 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <!-- Asegura la codificación y portabilidad -->
+    <!-- Configuración del compilador -->
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
-
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <dependencies>
-
+    <!-- WebDriverManager para manejar drivers automáticamente -->
     <dependency>
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
       <version>5.9.2</version>
     </dependency>
 
-    <!-- Cucumber -->
+    <!-- Dependencias de Cucumber -->
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-testng</artifactId>
       <version>7.20.1</version>
     </dependency>
-    
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-java</artifactId>
       <version>7.20.1</version>
+    </dependency>
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-cucumber7-jvm</artifactId>
+      <version>2.21.0</version>
+      <scope>test</scope>
     </dependency>
 
     <!-- Selenium -->
@@ -45,7 +49,7 @@
       <version>4.26.0</version>
     </dependency>
 
-    <!-- TestNG -->
+    <!-- TestNG para pruebas -->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
@@ -53,36 +57,40 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- Allure -->
+    <!-- Allure para generar reportes -->
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-testng</artifactId>
-      <version>2.29.0</version>
+      <version>2.30.0</version>
     </dependency>
   </dependencies>
 
   <build>
     <resources>
-      <!-- Asegura que se procesen los recursos y evita warnings -->
+      <!-- Asegura que los recursos se incluyan -->
       <resource>
         <directory>src/main/resources</directory>
       </resource>
     </resources>
 
     <plugins>
-      <!-- Surefire Plugin -->
+      <!-- Maven Surefire Plugin para ejecutar pruebas -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M5</version>
         <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>testng.xml</suiteXmlFile> <!-- Asegúrate de que la ruta esté correcta -->
+            <suiteXmlFile>testng.xml</suiteXmlFile>
           </suiteXmlFiles>
+          <!-- Configura la salida de Allure -->
+          <systemPropertyVariables>
+            <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+          </systemPropertyVariables>
         </configuration>
       </plugin>
 
-      <!-- Compiler Plugin -->
+      <!-- Maven Compiler Plugin para configurar Java -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -94,18 +102,21 @@
         </configuration>
       </plugin>
 
-      <!-- Allure Plugin -->
+      <!-- Allure Maven Plugin para generar reportes -->
       <plugin>
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-maven</artifactId>
         <version>2.15.2</version>
         <executions>
-        <execution>
-          <goals>
-            <goal>report</goal>
-          </goals>
-        </execution>
-      </executions>
+          <execution>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+        </configuration>
       </plugin>
     </plugins>
   </build>
