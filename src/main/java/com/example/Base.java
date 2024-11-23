@@ -1,5 +1,6 @@
 package com.example;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,14 +10,15 @@ public class Base {
 
     public static void initializeDriver() {
         if (driver == null) {
-            ChromeOptions options = new ChromeOptions();
-            options.setBinary(System.getenv("CHROME_BIN")); // Usar la ruta del binario de Chrome
-            options.addArguments("--headless"); // Ejecuta Chrome en modo headless (sin interfaz gráfica)
-            options.addArguments("--no-sandbox"); // Necesario para entornos de CI/CD como GitHub Actions
-            options.addArguments("--disable-dev-shm-usage"); // Necesario para entornos de CI/CD como GitHub Actions
+            // Usa WebDriverManager para manejar el ChromeDriver
+            WebDriverManager.chromedriver().setup();
 
-            System.setProperty("webdriver.chrome.driver", System.getenv("CHROME_DRIVER")); // Usar la ruta del binario de ChromeDriver
-            driver = new ChromeDriver(options); // Crea el `ChromeDriver` con las opciones especificadas
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless"); // Modo headless para CI/CD
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+
+            driver = new ChromeDriver(options);
         }
     }
 
@@ -27,7 +29,7 @@ public class Base {
     public static void quitDriver() {
         if (driver != null) {
             driver.quit();
-            driver = null; // Evitar problemas de reutilización
+            driver = null;
         }
     }
 }
