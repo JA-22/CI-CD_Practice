@@ -2,7 +2,7 @@ package com.example;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
-//
+//prueba
 @CucumberOptions(
     features = "src/test/resources/features/example.feature",
     glue = "com.example",
