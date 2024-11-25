@@ -1,6 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <!-- Versión del modelo POM -->
   <modelVersion>4.0.0</modelVersion>
+  
+  <!-- Información general del proyecto -->
   <groupId>com.example</groupId>
   <artifactId>maven-java-project</artifactId>
   <packaging>jar</packaging>
@@ -9,16 +13,15 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-    <!-- Asegura la codificación y portabilidad -->
+    <!-- Asegura la codificación y portabilidad del proyecto -->
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
-
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <dependencies>
-    <!-- Cucumber -->
+    <!-- Dependencias de Cucumber para pruebas -->
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-testng</artifactId>
@@ -29,22 +32,22 @@
       <artifactId>cucumber-java</artifactId>
       <version>7.20.1</version>
     </dependency>
-
+    
+    <!-- Dependencia de WebDriverManager para gestión de controladores de navegadores -->
     <dependency>
-    <groupId>io.github.bonigarcia</groupId>
-    <artifactId>webdrivermanager</artifactId>
-    <version>5.9.2</version> <!-- Cambia según la última versión estable -->
-</dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>5.9.2</version> 
+    </dependency>
 
-
-    <!-- Selenium -->
+    <!-- Dependencia de Selenium para pruebas automatizadas en navegadores -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
       <version>4.26.0</version>
     </dependency>
 
-    <!-- TestNG -->
+    <!-- Dependencia de TestNG para pruebas unitarias -->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
@@ -52,7 +55,7 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- Allure -->
+    <!-- Dependencia de Allure para generación de informes -->
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-testng</artifactId>
@@ -62,26 +65,26 @@
 
   <build>
     <resources>
-      <!-- Asegura que se procesen los recursos y evita warnings -->
+      <!-- Configuración de recursos del proyecto -->
       <resource>
         <directory>src/main/resources</directory>
       </resource>
     </resources>
 
     <plugins>
-      <!-- Surefire Plugin -->
+      <!-- Plugin Surefire para ejecutar pruebas unitarias -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M5</version>
         <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>testng.xml</suiteXmlFile> <!-- Asegúrate de que la ruta esté correcta -->
+            <suiteXmlFile>testng.xml</suiteXmlFile> 
           </suiteXmlFiles>
         </configuration>
       </plugin>
 
-      <!-- Compiler Plugin -->
+      <!-- Plugin Compiler para compilar el código fuente -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -93,18 +96,18 @@
         </configuration>
       </plugin>
 
-      <!-- Allure Plugin -->
+      <!-- Plugin Allure para generación de informes de pruebas -->
       <plugin>
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-maven</artifactId>
         <version>2.15.2</version>
         <executions>
-        <execution>
-          <goals>
-            <goal>report</goal>
-          </goals>
-        </execution>
-      </executions>
+          <execution>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
