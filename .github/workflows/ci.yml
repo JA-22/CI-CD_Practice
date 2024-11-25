@@ -53,10 +53,18 @@ jobs:
     - name: Run tests
       run: mvn test
 
+    - name: Check Allure results directory
+      run: |
+        if [ ! -d "target/allure-results" ]; then
+          echo "Allure results directory not found. Skipping report generation.";
+          exit 1;
+        fi
+
     - name: Generate Allure report
       run: mvn allure:report
 
     - name: Publish Allure report
+      if: success()
       uses: actions/upload-artifact@v3
       with:
         name: allure-report
