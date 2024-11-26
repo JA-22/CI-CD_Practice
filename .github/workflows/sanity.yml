@@ -20,10 +20,7 @@ on:
         required: true
         type: choice
         options:
-          - 'allTests'
-          - 'regressionTests'
-          - 'smokeTests'
-
+          - 'StepDefinitions.java'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -78,7 +75,7 @@ jobs:
         run: mvn clean install
 
       - name: Run tests
-        run: mvn test -Denv=${{ github.event.inputs.environment }} -DtestSuite=${{ github.event.inputs.test_suite }} -DbaseUrl=${{ secrets.BASE_URL }} -DapiKey=${{ secrets.API_KEY }}
+        run: mvn test -Dtest=${{ github.event.inputs.test_suite }} -Denv=${{ github.event.inputs.environment }} -DbaseUrl=${{ secrets.BASE_URL }} -DapiKey=${{ secrets.API_KEY }}
 
       - name: Generate Allure report
         run: mvn allure:report

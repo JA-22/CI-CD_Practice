@@ -10,25 +10,22 @@ import io.cucumber.java.en.Given;
     }
 }
     */
-
-import org.openqa.selenium.WebDriver;
-
-public class StepDefinitions {
-    private WebDriver driver;
-    private String environment;
-    private String testSuite;
-
-    public StepDefinitions() {
-        this.environment = System.getProperty("env", "QA");
-        this.testSuite = System.getProperty("testSuite", "allTests");
-        System.out.println("Running tests in environment: " + environment);
-        System.out.println("Test suite selected: " + testSuite);
-        this.driver = Base.getDriver();
+    
+    public class StepDefinitions {
+        private String baseUrl;
+        private String environment;
+    
+        public StepDefinitions() {
+            // Recuperar las variables de entorno configuradas
+            this.baseUrl = System.getProperty("baseUrl", "https://www.google.com");
+            this.environment = System.getProperty("env", "QA");
+            System.out.println("Running tests in environment: " + environment);
+            System.out.println("Base URL is: " + baseUrl);
+        }
+    
+        @Given("I open the Google homepage")
+        public void iOpenTheGoogleHomepage() {
+            Base.getDriver().get(baseUrl);
+        }
     }
-
-    @Given("I open the Google homepage")
-    public void iOpenTheGoogleHomepage() {
-        driver.get("https://www.google.com");
-    }
-}
-
+    
