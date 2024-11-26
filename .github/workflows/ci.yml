@@ -20,11 +20,13 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y wget unzip curl ca-certificates
+
     - name: Install Google Chrome
       run: |
         curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o google-chrome.deb
         sudo apt install -y ./google-chrome.deb
         google-chrome --version
+
     - name: Install ChromeDriver
       run: |
         CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
@@ -34,14 +36,17 @@ jobs:
         sudo mv chromedriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
         chromedriver --version
+
     - name: Verify installation
       run: |
         google-chrome --version
         chromedriver --version
+
     - name: Set environment variables
       run: |
         echo "CHROME_BIN=/usr/bin/google-chrome" >> $GITHUB_ENV
         echo "CHROME_DRIVER=/usr/local/bin/chromedriver" >> $GITHUB_ENV
+
     - name: Build with Maven
       run: mvn clean install
 
@@ -55,4 +60,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: allure-report
-        path: target/allure-results  # Ajustamos la ruta para subir el informe completo de Allure
+        path: target/allure-report  # Asegúrate de que esta ruta sea correcta y no tenga duplicación
