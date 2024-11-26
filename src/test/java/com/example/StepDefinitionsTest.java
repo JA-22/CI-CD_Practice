@@ -11,11 +11,11 @@ import io.cucumber.java.en.Given;
 }
     */
     
-    public class StepDefinitions {
+    public class StepDefinitionsTest {
         private String baseUrl;
         private String environment;
     
-        public StepDefinitions() {
+        public StepDefinitionsTest() {
             // Recuperar las variables de entorno configuradas
             this.baseUrl = System.getProperty("baseUrl", "https://www.google.com");
             this.environment = System.getProperty("env", "QA");
