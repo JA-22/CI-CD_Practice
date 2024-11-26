@@ -13,8 +13,8 @@ public class StepDefinitionsTest {
     public void setUp() {
         // Inicializar el WebDriver
         Base.initializeDriver();
-        this.baseUrl = System.getProperty("baseUrl", "https://www.google.com");
-        this.environment = System.getProperty("env", "QA");
+        this.baseUrl = System.getenv("BASE_URL");  // Usar variable de entorno directamente
+        this.environment = System.getenv("ENVIRONMENT");  // Usar variable de entorno directamente
         System.out.println("Running tests in environment: " + environment);
         System.out.println("Base URL is: " + baseUrl);
 

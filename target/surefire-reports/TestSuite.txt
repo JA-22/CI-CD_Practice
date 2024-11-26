@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.526 s - in TestSuite
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 2, Time elapsed: 8.144 s <<< FAILURE! - in TestSuite
+com.example.StepDefinitionsTest.setUp  Time elapsed: 8.025 s  <<< FAILURE!
+java.lang.IllegalArgumentException: La URL base no puede estar vacía
+	at com.example.StepDefinitionsTest.setUp(StepDefinitionsTest.java:23)
+
