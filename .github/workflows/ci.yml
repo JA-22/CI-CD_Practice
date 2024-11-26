@@ -55,4 +55,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: allure-report
-        path: target/allure-report  # Ajustamos la ruta para subir el informe completo de Allure
+        path: target/allure-results  # Ajustamos la ruta para subir el informe completo de Allure
