@@ -27,7 +27,6 @@ public class StepDefinitionsTest {
     @Test
     @Given("I open the Google homepage")
     public void iOpenTheGoogleHomepage() {
-        // Uso de la URL base
         Base.getDriver().get(baseUrl);
     }
 
