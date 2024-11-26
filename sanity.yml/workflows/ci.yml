@@ -1,6 +1,28 @@
 name: CI Workflow
 
-on: [push, pull_request]
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Select the environment"
+        required: true
+        default: 'QA'
+        type: choice
+        options:
+          - QA
+          - DEV
+          - SANDBOX
+          - STAGING
+          - UAT
+          - PROD
+      test_suite:
+        description: "Select the test suite to run"
+        required: true
+        type: choice
+        options:
+          - 'allTests'
+          - 'regressionTests'
+          - 'smokeTests'
 
 jobs:
   build:
@@ -46,18 +68,20 @@ jobs:
       run: |
         echo "CHROME_BIN=/usr/bin/google-chrome" >> $GITHUB_ENV
         echo "CHROME_DRIVER=/usr/local/bin/chromedriver" >> $GITHUB_ENV
+        echo "ENVIRONMENT=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
+        echo "TEST_SUITE=${{ github.event.inputs.test_suite }}" >> $GITHUB_ENV
 
     - name: Build with Maven
       run: mvn clean install
 
     - name: Run tests
-      run: mvn test
+      run: mvn test -Denv=${{ github.event.inputs.environment }} -DtestSuite=${{ github.event.inputs.test_suite }}
 
     - name: Generate Allure report
       run: mvn allure:report
 
     - name: Publish Allure report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3  
       with:
         name: allure-report
-        path: target/allure-report  # Asegúrate de que esta ruta sea correcta y no tenga duplicación
+        path: target/allure-report

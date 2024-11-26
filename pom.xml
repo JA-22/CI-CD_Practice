@@ -16,7 +16,7 @@
   </properties>
 
   <dependencies>
-
+    <!-- Dependencia de logback -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
@@ -76,6 +76,8 @@
           </suiteXmlFiles>
           <systemPropertyVariables>
             <allure.results.directory>target/allure-results</allure.results.directory>
+            <env>${env}</env>
+            <testSuite>${testSuite}</testSuite>
           </systemPropertyVariables>
         </configuration>
       </plugin>
@@ -93,24 +95,22 @@
       </plugin>
 
       <!-- Allure Plugin -->
-     <plugin>
-  <groupId>io.qameta.allure</groupId>
-  <artifactId>allure-maven</artifactId>
-  <version>2.15.2</version>
-  <configuration>
-    <resultsDirectory>target/allure-results</resultsDirectory>
-    <reportDirectory>target/allure-report</reportDirectory>
-  </configuration>
-  <executions>
-    <execution>
-      <goals>
-        <goal>report</goal>
-      </goals>
-    </execution>
-  </executions>
-</plugin>
-
-
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>2.15.2</version>
+        <configuration>
+          <resultsDirectory>target/allure-results</resultsDirectory>
+          <reportDirectory>target/allure-report</reportDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 </project>
