@@ -74,6 +74,7 @@
           <suiteXmlFiles>
             <suiteXmlFile>testng.xml</suiteXmlFile>
           </suiteXmlFiles>
+          <includes> <include>**/*Test.java</include> <!-- Asegúrate de que tus clases de prueba sigan este patrón --> </includes>
           <systemPropertyVariables>
             <allure.results.directory>target/allure-results</allure.results.directory>
           </systemPropertyVariables>
