@@ -2,8 +2,7 @@
 <suite name="Suite" verbose="1">
   <test name="Cucumber Tests">
     <classes>
-      <!-- Clase principal que ejecuta las pruebas de Cucumber -->
-      <class name="com.example.RunCucumberTest" />
+      <class name="com.example.RunCucumberTest"/>
     </classes>
   </test>
 </suite>
