@@ -75,8 +75,7 @@ jobs:
         run: mvn clean install
 
       - name: Run tests
-      run: mvn test -Denv=${{ github.event.inputs.environment }} -DbaseUrl=${{ secrets.BASE_URL }}
-      
+        run: mvn test -Dtest=${{ github.event.inputs.test_suite }} -Denv=${{ github.event.inputs.environment }} -DbaseUrl=${{ secrets.BASE_URL }} -DapiKey=${{ secrets.API_KEY }}
 
       - name: Generate Allure report
         run: mvn allure:report
