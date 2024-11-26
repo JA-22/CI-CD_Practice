@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-11-26T16:12:10 ART" name="Suite" finished-at="2024-11-26T16:12:18 ART" duration-ms="8328">
+  <suite started-at="2024-11-26T16:21:22 ART" name="Suite" finished-at="2024-11-26T16:21:31 ART" duration-ms="9191">
     <groups>
     </groups>
-    <test started-at="2024-11-26T16:12:10 ART" name="Cucumber Tests" finished-at="2024-11-26T16:12:18 ART" duration-ms="8328">
+    <test started-at="2024-11-26T16:21:22 ART" name="Cucumber Tests" finished-at="2024-11-26T16:21:31 ART" duration-ms="9191">
       <class name="com.example.StepDefinitionsTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.example.StepDefinitionsTest@478db956]" started-at="2024-11-26T16:12:10 ART" name="setUp" finished-at="2024-11-26T16:12:16 ART" duration-ms="6080" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.example.StepDefinitionsTest@478db956]" started-at="2024-11-26T16:21:22 ART" name="setUp" finished-at="2024-11-26T16:21:29 ART" duration-ms="7094" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="iOpenTheGoogleHomepage()[pri:0, instance:com.example.StepDefinitionsTest@478db956]" started-at="2024-11-26T16:12:16 ART" name="iOpenTheGoogleHomepage" finished-at="2024-11-26T16:12:18 ART" duration-ms="1890" status="PASS">
+        <test-method signature="iOpenTheGoogleHomepage()[pri:0, instance:com.example.StepDefinitionsTest@478db956]" started-at="2024-11-26T16:21:29 ART" name="iOpenTheGoogleHomepage" finished-at="2024-11-26T16:21:30 ART" duration-ms="1197" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- iOpenTheGoogleHomepage -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.example.StepDefinitionsTest@478db956]" started-at="2024-11-26T16:12:18 ART" name="tearDown" finished-at="2024-11-26T16:12:18 ART" duration-ms="163" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.example.StepDefinitionsTest@478db956]" started-at="2024-11-26T16:21:30 ART" name="tearDown" finished-at="2024-11-26T16:21:31 ART" duration-ms="718" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
