@@ -12,7 +12,7 @@ on:
           - QA_URL
           - DEV_URL
           - SANDBOX_URL
-          - STAGING_URL	
+          - STAGING_URL
           - UAT_URL
           - PROD_URL
       test_run:
@@ -63,9 +63,11 @@ jobs:
           chromedriver --version
 
       - name: Set environment variables
+        id: set_env
         run: |
           echo "CHROME_BIN=/usr/bin/google-chrome" >> $GITHUB_ENV
           echo "CHROME_DRIVER=/usr/local/bin/chromedriver" >> $GITHUB_ENV
+          # Acceder directamente al secreto usando el nombre seleccionado
           echo "ENVIRONMENT_URL=${{ secrets[github.event.inputs.environment] }}" >> $GITHUB_ENV
 
       - name: Build with Maven
@@ -74,7 +76,7 @@ jobs:
       - name: Run tests
         run: |
           echo "Running tests on environment: ${{ github.event.inputs.environment }}"
-          echo "Environment URL: ${{ secrets[github.event.inputs.environment] }}"
+          echo "Environment URL: $ENVIRONMENT_URL"
           mvn test -Dtest=${{ github.event.inputs.test_run }}
 
       - name: Generate Allure report
