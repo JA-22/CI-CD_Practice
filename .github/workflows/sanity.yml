@@ -20,7 +20,7 @@ on:
         required: true
         type: choice
         options:
-          - 'StepDefinitions.java'
+          - 'StepDefinitionsTest.java'
 jobs:
   build:
     runs-on: ubuntu-latest
