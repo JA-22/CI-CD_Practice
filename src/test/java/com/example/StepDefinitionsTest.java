@@ -9,30 +9,41 @@ public class StepDefinitionsTest {
     private String baseUrl;
     private String environment;
 
+    /**
+     * Configuración inicial antes de ejecutar los tests.
+     * Inicializa el WebDriver, establece la URL base y verifica su validez.
+     */
     @BeforeClass
     public void setUp() {
-        // Inicializar el WebDriver
-        Base.initializeDriver();
-        this.baseUrl = System.getenv("BASE_URL");  // Usar variable de entorno directamente
-        this.environment = System.getenv("ENVIRONMENT");  // Usar variable de entorno directamente
+        Base.initializeDriver(); // Inicializa el WebDriver.
+        this.baseUrl = System.getenv("BASE_URL"); // Obtiene la URL base desde variables de entorno.
+        this.environment = System.getenv("ENVIRONMENT"); // Obtiene el entorno desde variables de entorno.
+
         System.out.println("Running tests in environment: " + environment);
         System.out.println("Base URL is: " + baseUrl);
 
-        // Verificar que la URL base no esté vacía o mal formada
+        // Valida que la URL base no esté vacía.
         if (baseUrl == null || baseUrl.isEmpty()) {
             throw new IllegalArgumentException("La URL base no puede estar vacía");
         }
     }
 
+    /**
+     * Test que abre la página principal de Google.
+     * Este paso se vincula a un escenario de Cucumber.
+     */
     @Test
     @Given("I open the Google homepage")
     public void iOpenTheGoogleHomepage() {
-        Base.getDriver().get(baseUrl);
+        Base.getDriver().get(baseUrl); // Navega a la URL base.
     }
 
+    /**
+     * Limpieza después de la ejecución de los tests.
+     * Cierra el navegador y libera los recursos del WebDriver.
+     */
     @AfterClass
     public void tearDown() {
-        // Cerrar el WebDriver
         Base.quitDriver();
     }
 }

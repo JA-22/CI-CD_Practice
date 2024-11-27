@@ -1,8 +1,19 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!-- Archivo de configuración de TestNG -->
+
 <suite name="Suite" verbose="1">
+    <!-- Define un conjunto de pruebas (suite). 
+         'name' establece el nombre de la suite.
+         'verbose' controla el nivel de detalle en los logs de ejecución. -->
+
     <test name="Cucumber Tests">
+        <!-- Define un test dentro de la suite. 
+             'name' establece el nombre del test. -->
+
         <classes>
+            <!-- Lista de clases que contienen los casos de prueba -->
             <class name="com.example.StepDefinitionsTest"/>
+            <!-- Clase específica que TestNG ejecutará. -->
         </classes>
     </test>
 </suite>

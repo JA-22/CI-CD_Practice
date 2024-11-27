@@ -1,10 +1,12 @@
 name: CI Workflow
+# Nombre del workflow, visible en la interfaz de GitHub.
 
 on:
   workflow_dispatch:
     inputs:
       environment:
         description: "Select the environment"
+        # Permite seleccionar el entorno de ejecución.
         required: true
         default: 'QA'
         type: choice
@@ -15,8 +17,11 @@ on:
           - STAGING
           - UAT
           - PROD
+        # Define los entornos disponibles (opciones predefinidas).
+
       test_suite:
         description: "Select the test suite to run"
+        # Permite seleccionar la suite de pruebas a ejecutar.
         required: true
         type: choice
         options:
@@ -24,32 +29,39 @@ on:
           - 'allTests'
           - 'regressionTests'
           - 'smokeTests'
+        # Define las suites de prueba disponibles.
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Especifica el sistema operativo para el job.
     environment: ${{ github.event.inputs.environment }}
+    # Usa el entorno seleccionado como variable.
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        # Descarga el código fuente del repositorio.
 
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '21'
+        # Configura Java (versión 21) usando Zulu JDK.
 
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y wget unzip curl ca-certificates
+        # Instala herramientas necesarias para el job.
 
       - name: Install Google Chrome
         run: |
           curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o google-chrome.deb
           sudo apt install -y ./google-chrome.deb
           google-chrome --version
+        # Instala Google Chrome y verifica la versión.
 
       - name: Install ChromeDriver
         run: |
@@ -60,11 +72,13 @@ jobs:
           sudo mv chromedriver /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
           chromedriver --version
+        # Descarga e instala la última versión de ChromeDriver.
 
       - name: Verify installation
         run: |
           google-chrome --version
           chromedriver --version
+        # Verifica que Google Chrome y ChromeDriver se instalaron correctamente.
 
       - name: Set environment variables
         run: |
@@ -74,18 +88,23 @@ jobs:
           echo "API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
           echo "ENVIRONMENT=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
           echo "TEST_SUITE=${{ github.event.inputs.test_suite }}" >> $GITHUB_ENV
+        # Establece variables de entorno, incluyendo API keys y la URL base.
 
       - name: Build with Maven
         run: mvn clean install
+        # Compila el proyecto usando Maven.
 
       - name: Run tests
         run: mvn test -Dtest=${{ github.event.inputs.test_suite }} -Denv=${{ github.event.inputs.environment }} -DbaseUrl=${{ secrets.BASE_URL }} -DapiKey=${{ secrets.API_KEY }}
+        # Ejecuta las pruebas usando Maven, con parámetros personalizados según los inputs.
 
       - name: Generate Allure report
         run: mvn allure:report
+        # Genera el reporte de Allure después de la ejecución de las pruebas.
 
       - name: Publish Allure report
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
           path: target/allure-report
+        # Publica el reporte de Allure como artefacto descargable.
